@@ -58,6 +58,10 @@ function createFunctions(Reflux, PromiseFactory) {
                 resolve();
             }
         });
+        
+        // Ensure that the promise does trigger "Uncaught (in promise)" errors in console if no error handler is added
+        // See: https://github.com/reflux/reflux-promise/issues/4
+        createdPromise.catch(function() {});
 
         return createdPromise;
     }
